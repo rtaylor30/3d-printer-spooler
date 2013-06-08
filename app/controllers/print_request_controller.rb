@@ -15,3 +15,4 @@ class PrintRequestController < ApplicationController
     print_request.save
   end
 end
+
