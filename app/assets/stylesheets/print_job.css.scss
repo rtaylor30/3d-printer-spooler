@@ -1,0 +1,15 @@
+
+div.print-jobs {
+  table {
+    width: 700px;
+    background-color: #ccc;
+    border-collapse: collapse;
+
+    tr {
+      td, th {
+        border: 1px solid black;
+      }
+    }
+  }
+}
+

@@ -1,0 +1,25 @@
+<div class="print-jobs">
+  <table>
+    <thead>
+      <tr>
+        <th>Print Job</th>
+        <th>Attached Requests</th>
+        <th>Assigned Printer</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @print_jobs.each do |print_job| %>
+        <tr>
+          <td><%= print_job.id %></td>
+          <td>
+            <% print_job.print_requests.each do |print_request| %>
+              <div><%= print_request.stl_file_name %></div>
+            <% end %>
+          </td>
+          <td><%= print_job.printer && print_job.printer.name %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+

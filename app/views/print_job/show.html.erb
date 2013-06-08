@@ -1,0 +1,8 @@
+<div class="print-job-details">
+  <%= @print_job.id %>
+  <%= form_for @print_job, {url: {action: 'update'}} do |form| %>
+    <%= form.text_field :printer %>
+    <%= form.submit 'Update' %>
+  <% end %>
+</div>
+
