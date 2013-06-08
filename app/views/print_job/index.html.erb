@@ -10,13 +10,17 @@
     <tbody>
       <% @print_jobs.each do |print_job| %>
         <tr>
-          <td><%= print_job.id %></td>
+          <td><%= link_to print_job.id, print_job_path(print_job) %></td>
           <td>
             <% print_job.print_requests.each do |print_request| %>
-              <div><%= print_request.stl_file_name %></div>
+              <div><%= link_to print_request.stl_file_name, print_request_path(print_request) %></div>
             <% end %>
           </td>
-          <td><%= print_job.printer && print_job.printer.name %></td>
+          <td>
+            <% if print_job.printer %>
+              <%= print_job.printer.name %>
+            <% end %>
+          </td>
         </tr>
       <% end %>
     </tbody>

@@ -1,7 +1,32 @@
 <div class="print-job-details">
-  <%= @print_job.id %>
   <%= form_for @print_job, {url: {action: 'update'}} do |form| %>
-    <%= form.text_field :printer %>
+    <%= @print_job.id %>
+    <div>
+        <%= form.text_field :printer, value: @print_job.printer.id %>
+    </div>
+    <div>
+      <h3>Add Requests to this Job</h3>
+      <div>
+        <select id="select_requests">
+          <% @print_requests.each do |print_request| %>
+            <option value="<%= print_request.id %>">
+              <%= print_request.stl_file_name %>
+            </option>
+          <% end %>
+        </select>
+        <input id="add_print_request" type="button" value="Add"/>
+      </div>
+      <div>
+        <ul class="added-print-request-list">
+          <% @print_job.print_requests and @print_job.print_requests.each do |print_request| %>
+            <li>
+              <input type="hidden" name="print_requests[]" value="<%= print_request.id.to_s %>"/>
+              <span><%= print_request.stl_file_name %></span>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
     <%= form.submit 'Update' %>
   <% end %>
 </div>
