@@ -1,0 +1,36 @@
+<div class="print-request header">
+  <div class="logo"><%# TODO insert a logo here %></div>
+  <div class="user-information">
+    <div class="user-id"><%# TODO insert user information %></div>
+    <div class="upload-stl-file">
+      <%= form_tag({:action => :create}, :multipart => true) do %>
+        <%= file_field_tag 'stl_file' %>
+        <%= submit_tag %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="current-print-jobs">
+  <table>
+    <thead>
+      <th>STL File Name</th>
+      <th>Time Submitted</th>
+      <th>Status</th>
+      <th>Time Remaining</th>
+      <th>Printer Name</th>
+    </thead>
+    <tbody>
+      <% @print_requests.each do |print_request| %>
+        <tr>
+          <td><%= print_request.stl_file_name %></td>
+          <td><%= print_request.created_at %></td>
+          <td><%= print_request.status %></td>
+          <td><%# TODO IMPLEMENT %></td>
+          <td><%= print_request.printer && print_request.printer.name %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+

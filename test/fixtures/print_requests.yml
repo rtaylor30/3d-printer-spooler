@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  stl_file_name: MyString
+  status: MyString
+  printer: 
+
+two:
+  stl_file_name: MyString
+  status: MyString
+  printer: 
