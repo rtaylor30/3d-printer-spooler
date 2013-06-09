@@ -1,0 +1,7 @@
+Your print request job has finished.<br/>
+<% if @print_request.status == 'success' %>
+  Your 3D print job has completed successfully, and your item is ready for pickup.
+<% else %>
+  Your 3D print job failed, please retry or talk to an administrator to find out what went wrong.
+<% end %>
+
