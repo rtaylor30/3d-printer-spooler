@@ -11,13 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130608171224) do
+ActiveRecord::Schema.define(:version => 20130612202601) do
 
   create_table "print_jobs", :force => true do |t|
     t.integer  "printer_id"
     t.integer  "assigned_by_id"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
+    t.string   "status"
   end
 
   add_index "print_jobs", ["assigned_by_id"], :name => "index_print_jobs_on_assigned_by_id"

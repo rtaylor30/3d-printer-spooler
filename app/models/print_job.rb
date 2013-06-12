@@ -3,6 +3,6 @@ class PrintJob < ActiveRecord::Base
   belongs_to :assigned_by
   has_many :print_requests
 
-  attr_accessible :id
+  attr_accessible :id, :status
 end
 

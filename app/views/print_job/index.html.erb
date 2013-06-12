@@ -5,6 +5,7 @@
         <th>Print Job</th>
         <th>Attached Requests</th>
         <th>Assigned Printer</th>
+        <th>Status</th>
       </tr>
     </thead>
     <tbody>
@@ -21,6 +22,7 @@
               <%= print_job.printer.name %>
             <% end %>
           </td>
+          <td><%= print_job.status %></td>
         </tr>
       <% end %>
     </tbody>
