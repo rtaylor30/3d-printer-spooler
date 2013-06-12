@@ -2,7 +2,8 @@
   <%= form_for @print_job, {url: {action: 'update'}} do |form| %>
     <%= @print_job.id %>
     <div>
-        <%= form.text_field :printer, value: @print_job.printer.id %>
+        <label for="printer">Printer: </label>
+        <%= form.collection_select :printer, @printers, :id, :name %>
     </div>
     <div>
       <h3>Add Requests to this Job</h3>

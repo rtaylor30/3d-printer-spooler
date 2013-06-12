@@ -6,6 +6,7 @@ class PrintJobController < ApplicationController
   def show
     @print_job = PrintJob.find(params[:id])
     @print_requests = PrintRequest.all
+    @printers = Printer.all
   end
 
   def update
