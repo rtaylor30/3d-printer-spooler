@@ -17,3 +17,7 @@ body, html {
   border: 0;
 }
 
+p.notice, p.alert {
+  display: none;
+}
+
