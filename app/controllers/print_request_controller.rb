@@ -4,6 +4,13 @@ class PrintRequestController < ApplicationController
     @print_requests = PrintRequest.includes(:printer)
   end
 
+  def update
+    print_request = PrintRequest.find(params[:id])
+    print_request.status = params[:print_request][:status]
+    print_request.save!
+    render nothing: true
+  end
+
   def create
     file_io = params['stl_file']
     print_request = PrintRequest.new

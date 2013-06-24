@@ -1,3 +1,4 @@
+<iframe id="blank_iframe" style="display: none"></iframe>
 <div class="current-print-jobs">
   <table class="display dataTable">
     <thead>
@@ -14,7 +15,15 @@
     <tbody>
       <% @print_requests.each do |print_request| %>
         <tr>
-          <td><%= print_request.status %></td>
+          <td>
+            <% if can? :manage, :all %>
+              <%= form_for print_request, html: {target: 'blank_iframe'} do |f| %>
+                <%= render partial: 'print_request/status', locals: {status: print_request.status} %>
+              <% end %>
+            <% else %>
+              <%= print_request.status %>
+            <% end %>
+          </td>
           <td><%= print_request.stl_file_name %></td>
           <td><%= print_request.created_at.to_s :in_standard_format %></td>
           <% if can? :manage, :all %>

@@ -1,3 +1,6 @@
+//= require jquery.dataTables.min.js
+//= require jquery-ui-1.10.3.custom.min.js
+
 (function() {
   $(function() {
     $('input#upload-file-overlay').click(function() {
