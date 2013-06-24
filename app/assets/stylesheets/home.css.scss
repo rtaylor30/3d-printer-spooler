@@ -2,7 +2,7 @@
 
 $fg_bright_color: #ffd600;
 $fg_dark_color: #3d4144;
-$section_internal_width: 800px;
+$section_internal_width: 1024px;
 $section_padding: 8px;
 
 div.user-header {
@@ -49,9 +49,15 @@ div.user-header {
   }
 }
 
-h1, h2 {
+h2 {
   color: $fg_dark_color;
   margin: 5px 0 5px 25px;
+}
+
+h1 {
+  color: $fg_dark_color;
+  font-size: 42px;
+  margin: 30px;
 }
 
 input[type=button], input[type=submit] {
@@ -80,9 +86,10 @@ input#upload-file-overlay {
 
 div.section {
   width: $section_internal_width + $section_padding * 2;
-  margin: 10px;
+  margin: 10px auto;
   border: 1px solid #ccc;
   padding: $section_padding;
+  position: relative;
 }
 
 div.upload-files.section {
@@ -90,15 +97,29 @@ div.upload-files.section {
 }
 
 div.check-status.section {
+  position: relative;
+  overflow: auto;
+
+  h2 {
+    margin-bottom: 25px;
+  }
+
   div#refresh-status {
     float: right;
     font-size: 16px;
   }
 
   table {
+    width: $section_internal_width - 60;
+
     th, td {
       padding: 8px;
     }
+  }
+
+  div.dataTables_info, div.dataTables_paginate {
+    margin-bottom: 25px;
+    position: relative;
   }
 }
 

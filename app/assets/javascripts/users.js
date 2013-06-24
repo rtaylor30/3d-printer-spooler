@@ -25,6 +25,8 @@
 
       $('input[type=submit]').val('Sign Up');
     });
+
+    $('form').attr('action', $('#alt_path').val());
   }
 
   function validate_form() {

@@ -7,6 +7,10 @@
     $('input#stl_file').change(function() {
       $('input#upload-file-overlay').val($(this).val());
     });
+
+    $('table').dataTable({
+      'aaSorting': [[2, 'desc']] 
+    });
   });
 })();
 

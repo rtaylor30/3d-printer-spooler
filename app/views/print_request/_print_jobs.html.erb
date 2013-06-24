@@ -1,5 +1,5 @@
 <div class="current-print-jobs">
-  <table>
+  <table class="display dataTable">
     <thead>
       <th>Status</th>
       <th>STL File Name</th>
@@ -8,6 +8,7 @@
       <% if can? :manage, :all %>
         <th>Time Remaining</th>
         <th>Printer Name</th>
+        <th>User</th>
       <% end %>
     </thead>
     <tbody>
@@ -19,10 +20,15 @@
           <% if can? :manage, :all %>
             <td><%# TODO IMPLEMENT %></td>
             <td><%= print_request.printer && print_request.printer.name %></td>
+            <td><%= print_request.user.nil? ? 'No User!' : print_request.user.email %></td>
           <% end %>
         </tr>
       <% end %>
     </tbody>
   </table>
+
+  <% if @print_requests.size == 0 %>
+    <div>There are no requests from you</div>
+  <% end %>
 </div>
 

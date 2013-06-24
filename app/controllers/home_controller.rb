@@ -2,11 +2,21 @@ class HomeController < ApplicationController
   before_filter :authenticate_user!, only: :index
 
   def index
-    @print_requests = current_user.print_requests
-    @print_requests = @print_requests.sort_by do |pr|
-      pr.updated_at
+    if current_user.admin?
+      @print_requests = PrintRequest.all
+    else
+      @print_requests = current_user.print_requests
     end
-    @last_updated_dt = @print_requests.last.updated_at
+
+    if @print_requests.size > 0
+      @print_requests = @print_requests.sort_by do |pr|
+        pr.updated_at
+      end
+
+      @last_updated_dt = @print_requests.last.updated_at
+    else
+      @last_updated_dt = Time.now
+    end
   end
 
   def root
