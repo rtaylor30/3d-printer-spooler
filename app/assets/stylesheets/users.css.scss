@@ -1,0 +1,67 @@
+@mixin no-box-shadow {
+  box-shadow: 0;
+  -moz-box-shadow: 0;
+  -webkit-box-shadow: 0;
+}
+
+@mixin a-radius-of($radius_pixels) {
+  border-radius: $radius_pixels;
+  -moz-border-radius: $radius_pixels;
+  -webkit-border-radius: $radius_pixels;
+}
+
+@mixin transparency($fraction) {
+  opacity: $fraction;
+  filter: alpha(opacity=$fraction*100);
+}
+
+div.login-form {
+  width: 400px;
+  margin: 50px auto 0 auto;
+
+  h2 {
+    $logo_size: 30px;
+    $h2_size: 24px;
+
+    background: {
+      image: image-url('logo.png');
+      repeat: no-repeat;
+    }
+
+    padding-left: $logo_size + 10;
+    height: $logo_size + 10;
+    font-size: $h2_size;
+    padding-top: ($logo_size - $h2_size + 10) / 2;
+  }
+
+  input {
+    padding: 4px;
+  }
+
+  input[type=button], input[type=submit] {
+    padding: 7px 14px;
+    color: white;
+    cursor: pointer;
+
+    @include no-box-shadow;
+    @include a-radius-of(10px);
+    border-width: 0px;
+  }
+
+  input#new-account {
+    background-color: #888;
+    overflow: hidden;
+  }
+
+  input#sign-in {
+    background-color: green;
+    clear: right;
+  }
+
+  div.verify-password {
+    height: 0px;
+    @include transparency(0);
+    overflow: hidden;
+  }
+}
+

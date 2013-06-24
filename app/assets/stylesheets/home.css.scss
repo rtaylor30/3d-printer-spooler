@@ -1,3 +1,47 @@
-// Place all the styles related to the home controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+$fg_bright_color: #ffd600;
+$fg_dark_color: #3d4144;
+
+div.user-header {
+  $header_height: 50px;
+  $header_padding: 2px;
+  $title_font_size: 28px;
+  $text_font_size: 16px;
+  $internal_height: $header_height - 2 * $header_padding;
+  
+  width: 100%;
+  background-color: $fg_dark_color;
+  height: $internal_height;
+  padding: $header_padding;
+  color: white;
+
+  div.title {
+    text-transform: uppercase;
+    font-size: $title_font_size;
+    padding: ($internal_height - $title_font_size) / 2;
+    float: left;
+
+    span:nth-child(2) {
+      color: $fg_bright_color;
+    }
+  }
+
+  div.logo {
+
+  }
+
+  div.user-details {
+    float: right;
+    font-size: $text_font_size;
+    padding: (($internal_height - $text_font_size) / 2) 30px;
+    font-weight: bold;
+    
+    a {
+      color: white;
+      text-decoration: none;
+
+      &:hover { color: white; }
+      &:visited { color: white; }
+    }
+  }
+}
+
