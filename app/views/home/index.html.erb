@@ -1,8 +1,21 @@
-<h2>Home Page</h2>
-<h3>Welcome to the 3D Printer Spooling Service</h3>
+<h1>Dashboard</h1>
 
-<div class="summary">
-  This service is used in conjuction with the 3D printers in the Intention Studio at Georgia
-  Institute of Technology.
+<div class="upload-files section">
+  <h2>Upload a File</h2>
+
+  <div class="upload-stl-file">
+    <%= form_tag({action: :create, controller: :print_request}, :multipart => true) do %>
+      <input id="upload-file-overlay" type="text"></input>
+      <%= file_field_tag 'stl_file' %>
+      <%= submit_tag 'Upload' %>
+    <% end %>
+  </div>
+</div>
+<div class="check-status section">
+  <h2>Status
+    <div id="refresh-status">Last Updated: <%= @last_updated_dt.to_s :in_standard_format %></div>
+  </h2>
+ 
+  <%= render 'print_request/print_jobs' %>
 </div>
 

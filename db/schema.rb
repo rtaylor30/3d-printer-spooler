@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130612202601) do
+ActiveRecord::Schema.define(:version => 20130624201338) do
 
   create_table "print_jobs", :force => true do |t|
     t.integer  "printer_id"
@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(:version => 20130612202601) do
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
     t.integer  "print_job_id"
+    t.integer  "user_id"
   end
 
   add_index "print_requests", ["printer_id"], :name => "index_print_requests_on_printer_id"
@@ -56,6 +57,7 @@ ActiveRecord::Schema.define(:version => 20130612202601) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
+    t.string   "role"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

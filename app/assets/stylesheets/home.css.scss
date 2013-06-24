@@ -1,5 +1,9 @@
+@import 'users';
+
 $fg_bright_color: #ffd600;
 $fg_dark_color: #3d4144;
+$section_internal_width: 800px;
+$section_padding: 8px;
 
 div.user-header {
   $header_height: 50px;
@@ -41,6 +45,59 @@ div.user-header {
 
       &:hover { color: white; }
       &:visited { color: white; }
+    }
+  }
+}
+
+h1, h2 {
+  color: $fg_dark_color;
+  margin: 5px 0 5px 25px;
+}
+
+input[type=button], input[type=submit] {
+  padding: 7px 14px;
+  color: white;
+  cursor: pointer;
+
+  @include no-box-shadow;
+  @include a-radius-of(10px);
+  border-width: 0px;
+}
+
+input[type=submit] {
+  background-color: green;
+}
+
+input[type=file] {
+  display: none;
+}
+
+input#upload-file-overlay {
+  padding: 3px;
+  width: $section_internal_width - 100;
+  @include a-radius-of(5px);
+}
+
+div.section {
+  width: $section_internal_width + $section_padding * 2;
+  margin: 10px;
+  border: 1px solid #ccc;
+  padding: $section_padding;
+}
+
+div.upload-files.section {
+
+}
+
+div.check-status.section {
+  div#refresh-status {
+    float: right;
+    font-size: 16px;
+  }
+
+  table {
+    th, td {
+      padding: 8px;
     }
   }
 }

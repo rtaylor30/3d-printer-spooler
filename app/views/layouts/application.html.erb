@@ -14,11 +14,11 @@
     </div>
     <div class="logo"></div>
     <div class="user-details">
-      <% if @user.nil? %>
+      <% if current_user.nil? %>
         <%= link_to 'Login', new_user_session_path %>
       <% else %>
-        <%= @user.email %>
-        (<%= link_to 'Sign Out', '#' %>)
+        <%= current_user.email %>
+        (<%= link_to 'Sign Out', destroy_user_session_path, method: :delete %>)
       <% end %>
     </div>
   </div>

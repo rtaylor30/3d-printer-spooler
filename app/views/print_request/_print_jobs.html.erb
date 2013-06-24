@@ -1,0 +1,28 @@
+<div class="current-print-jobs">
+  <table>
+    <thead>
+      <th>Status</th>
+      <th>STL File Name</th>
+      <th>Time Submitted</th>
+
+      <% if can? :manage, :all %>
+        <th>Time Remaining</th>
+        <th>Printer Name</th>
+      <% end %>
+    </thead>
+    <tbody>
+      <% @print_requests.each do |print_request| %>
+        <tr>
+          <td><%= print_request.status %></td>
+          <td><%= print_request.stl_file_name %></td>
+          <td><%= print_request.created_at.to_s :in_standard_format %></td>
+          <% if can? :manage, :all %>
+            <td><%# TODO IMPLEMENT %></td>
+            <td><%= print_request.printer && print_request.printer.name %></td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
