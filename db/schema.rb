@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130624201338) do
+ActiveRecord::Schema.define(:version => 20130716152148) do
 
   create_table "print_jobs", :force => true do |t|
     t.integer  "printer_id"
@@ -28,10 +28,11 @@ ActiveRecord::Schema.define(:version => 20130624201338) do
     t.string   "stl_file_name"
     t.string   "status"
     t.integer  "printer_id"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
     t.integer  "print_job_id"
     t.integer  "user_id"
+    t.string   "gcode_filename"
   end
 
   add_index "print_requests", ["printer_id"], :name => "index_print_requests_on_printer_id"
