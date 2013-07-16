@@ -1,5 +1,6 @@
 Web3dPrinterSpooler::Application.routes.draw do
   root to: 'home#root'
+  match '/poll_jobs' => 'home#poll_jobs'
   devise_for :users
 
   resources :print_job
