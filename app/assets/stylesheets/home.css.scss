@@ -4,6 +4,9 @@ $fg_bright_color: #ffd600;
 $fg_dark_color: #3d4144;
 $section_internal_width: 1024px;
 $section_padding: 8px;
+$error_bg_color: #fac;
+$error_fg_color: #f00;
+$error_border_color: #f66;
 
 div.user-header {
   $header_height: 50px;
@@ -82,6 +85,18 @@ input#upload-file-overlay {
   padding: 3px;
   width: $section_internal_width - 100;
   @include a-radius-of(5px);
+}
+
+div.error-msg {
+  border: 2px solid $error_border_color;
+  color: $error_fg_color;
+  background-color: $error_bg_color;
+  width: 800px;
+  margin: auto;
+  padding: 7px;
+  @include a-radius-of(10px);
+  display: none;
+  text-align: center;
 }
 
 div.section {

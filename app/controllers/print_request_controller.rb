@@ -1,4 +1,5 @@
 class PrintRequestController < ApplicationController
+  before_filter :validate_can_create, only: :create
 
   def index
     @print_requests = PrintRequest.includes(:printer)
@@ -22,10 +23,22 @@ class PrintRequestController < ApplicationController
       file.write(file_io.read)
     end
 
-    print_request.status = 'Not Started'
+    print_request.status = 'Not Ready'
     print_request.user = current_user
     print_request.save
     redirect_to '/home'
   end
+
+  private
+
+    def validate_can_create
+      if not can? :manage, :all
+        num_print_requests = PrintRequest.where(user_id: current_user.id, status: 'Not Ready').count
+
+        if num_print_requests >= 3
+          redirect_to '/home', flash: { error: 'Cannot have more than 3 requests at a time' }
+        end
+      end
+    end
 end
 

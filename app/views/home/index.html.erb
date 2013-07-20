@@ -1,6 +1,9 @@
 <div class="upload-files section">
+  <div class="error-msg" style="<%= !flash[:error].blank? ? 'display:block' : '' %>">
+    <%= flash[:error] %>
+  </div>
+  
   <h2>Upload a File</h2>
-
   <div class="upload-stl-file">
     <%= form_tag({action: :create, controller: :print_request}, :multipart => true) do %>
       <input id="upload-file-overlay" type="text"></input>

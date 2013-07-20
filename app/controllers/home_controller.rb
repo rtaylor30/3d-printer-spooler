@@ -2,6 +2,7 @@ class HomeController < ApplicationController
   before_filter :authenticate_user!, only: :index
 
   def index
+    flash.keep
     if current_user.admin?
       @print_requests = PrintRequest.all
     else
