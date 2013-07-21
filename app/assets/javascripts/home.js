@@ -14,6 +14,10 @@
     $('table').dataTable({
       'aaSorting': [[2, 'desc']] 
     });
+
+    $('#stl_file').change(function() {
+      init_stl_previewer($(this).val());
+    });
   });
 })();
 

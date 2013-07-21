@@ -1,15 +1,17 @@
+//= require three.js
+//= require Detector.js
+//= require STLLoader.js
+//= require stats.min.js
+
 (function() {
   if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
   
   var container, stats;
   var geometry, camera, center, scene, renderer, mesh, printbox, printbox_geo, cameraPositionScalar;
   
-  init();
-  animate();
-  
-  function init() {
+  init_stl_previewer = function(stl_file_name) {
     container = document.createElement( 'div' );
-    document.body.appendChild( container );
+    $('.stl-preview').append(container);
     camera = new THREE.PerspectiveCamera( 30, window.innerWidth / window.innerHeight, 1, 1000 );
     scene = new THREE.Scene();
     scene.fog = new THREE.Fog( 0x72645b, 2, 1000 );
@@ -21,8 +23,8 @@
     printbox_geo.applyMatrix((new THREE.Matrix4()).makeTranslation(0, 50, 0));
     printbox = new THREE.Mesh(printbox_geo, new THREE.MeshBasicMaterial({ wireframe: 1})); 
     scene.add( printbox );
-
-    var loader = new THREE.STLLoader();
+    
+    loader = new THREE.STLLoader();
     loader.addEventListener( 'load', function ( event ) {
       geometry = event.content;
       mesh = new THREE.Mesh( geometry, material);
@@ -36,7 +38,7 @@
       mesh.castShadow = true;
     });
     
-    loader.load( './twist_gear_vase2-binary.stl' );
+    loader.load( stl_file_name );
     
     scene.add( new THREE.AmbientLight( 0x404040 ) );
     addShadowedLight( 1, 1, 1, 0xffffff, 1.35 );
@@ -60,6 +62,8 @@
     container.appendChild( stats.domElement );
     
     window.addEventListener( 'resize', onWindowResize, false );
+
+    animate();
   }
   
   function animate() {

@@ -1,3 +1,6 @@
+//= require three.js
+//= require Detector.js
+
 /**
  * @author aleeper / http://adamleeper.com/
  * @author mrdoob / http://mrdoob.com/
