@@ -22,9 +22,9 @@ class PrintRequestController < ApplicationController
   def create
     file_io = params['stl_file']
     print_request = PrintRequest.new
-    print_request.stl_file_name = file_io.original_filename
-    timestamp = Time.now.to_s :in_file_timestamp_format 
     filename = timestamp + '_' + file_io.original_filename
+    print_request.stl_file_name = filename
+    timestamp = Time.now.to_s :in_file_timestamp_format 
 
     File.open(Rails.root.join('public', 'stl_files', filename), 'wb') do |file|
       file.write(file_io.read)

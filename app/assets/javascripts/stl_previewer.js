@@ -46,7 +46,7 @@
     addShadowedLight( 0.5, 1, -1, 0xffaa00, 1 );
     
     renderer = new THREE.WebGLRenderer( { antialias: true, alpha: false } );
-    renderer.setSize( 800, 600 );
+    renderer.setSize( 640, 480 );
     
     renderer.gammaInput = true;
     renderer.gammaOutput = true;
@@ -60,7 +60,8 @@
     stats = new Stats();
     stats.domElement.style.position = 'absolute';
     stats.domElement.style.top = '0px';
-    container.appendChild( stats.domElement );
+    // statistics about the previewer
+    // container.appendChild( stats.domElement );
 
     animate();
   }
