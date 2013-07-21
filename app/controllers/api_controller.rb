@@ -15,7 +15,7 @@ class ApiController < ApplicationController
   private
 
     def check_api_key
-      raise 'Invalid API key' if params[:key] != '4ty7asdfjv7ty241itbnav2153'
+      raise 'Invalid API key' if params[:key] != APP_CONFIG['api_key']
     end
 end
 

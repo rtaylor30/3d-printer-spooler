@@ -6,6 +6,8 @@ Web3dPrinterSpooler::Application.routes.draw do
   resources :print_job
   resources :print_request
   match '/home' => 'home#index' 
+  match '/update_print_request' => 'api#update_print_request'
+  match '/poll_new_requests' => 'api#poll_new_requests'
 
   if ENV['ADMIN_PRODUCTION']
     match '/admin' => 'admin#index'

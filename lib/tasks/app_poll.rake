@@ -1,5 +1,3 @@
-require 'net/http'
-require 'uri'
 require 'json'
 
 namespace :app do
@@ -9,7 +7,7 @@ namespace :app do
 
     # Update the current print_requests
     uri = "#{base_uri}/update_print_request?key=#{APP_CONFIG['api_key']}"
-    response = Net::HTTP.get_response( uri )
+    response = RestClient.get uri
 
     print_requests = JSON.parse( response )
     print_requests.each do |print_request|

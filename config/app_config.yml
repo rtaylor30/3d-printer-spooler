@@ -1,5 +1,5 @@
 development:
-  poll_base_uri: "http://localhost:3000"
+  poll_base_uri: "http://ec2-174-129-184-39.compute-1.amazonaws.com"
   api_key: 4ty7asdfjv7ty241itbnav2153
 
 stage:
