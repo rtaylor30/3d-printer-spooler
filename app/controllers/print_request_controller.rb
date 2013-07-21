@@ -1,6 +1,5 @@
-require 'net/http'
-require 'uri'
 require 'json'
+require 'slicer'
 
 class PrintRequestController < ApplicationController
   before_filter :validate_can_create, only: :create
@@ -42,9 +41,9 @@ class PrintRequestController < ApplicationController
   private
 
     def sync print_request
-      base_uri = URI.parse( APP_CONFIG['poll_base_uri'] )
+      base_uri = APP_CONFIG['poll_base_uri']
       uri = "#{base_uri}/update_print_request/#{print_request.id}"
-      response = Net::HTTP.post_form( uri, {
+      response = RestClient.post( uri, {
         'key' => APP_CONFIG['api_key'],
         'status' => print_request.status} )
     end
