@@ -30,9 +30,12 @@ class PrintRequestController < ApplicationController
       file.write(file_io.read)
     end
 
-    print_request.status = 'Not Ready'
+    print_request.status = 'Processing'
     print_request.user = current_user
     print_request.save
+    
+    Slicer.run_slicer print_request.id
+
     redirect_to '/home'
   end
 

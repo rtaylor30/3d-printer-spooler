@@ -1,5 +1,5 @@
 <select class='print-request-status' name='print_request[status]'>
-  <% ['Not Ready', 'Delivered', 'Started', 'Ready for Pickup', 'Completed'].each do |s| %>
+  <% ['Processing', 'Not Ready', 'Delivered', 'Started', 'Ready for Pickup', 'Completed'].each do |s| %>
     <option value="<%= s %>" <%= 'selected' if status == s %>><%= s %></option>
   <% end %>
 </select>

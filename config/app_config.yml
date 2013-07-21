@@ -1,16 +1,20 @@
 development:
   poll_base_uri: "http://ec2-54-224-193-235.compute-1.amazonaws.com"
   api_key: 4ty7asdfjv7ty241itbnav2153
+  repetier_uri: "http://ME00612.me.gatech.edu:8000"
 
 stage:
   poll_base_uri: "http://localhost:3000"
   api_key: 4ty7asdfjv7ty241itbnav2153
+  repetier_uri: "http://ME00612.me.gatech.edu:8000"
 
 test:
   poll_base_uri: "http://localhost:3000"
   api_key: 4ty7asdfjv7ty241itbnav2153
+  repetier_uri: "http://ME00612.me.gatech.edu:8000"
 
 production:
   poll_base_uri: "http://ec2-54-224-193-235.compute-1.amazonaws.com"
   api_key: 4ty7asdfjv7ty241itbnav2153
+  repetier_uri: "http://ME00612.me.gatech.edu:8000"
 
