@@ -6,7 +6,7 @@ namespace :app do
     base_uri = URI.parse( APP_CONFIG['poll_base_uri'] )
 
     # Update the current print_requests
-    uri = "#{base_uri}/update_print_request?key=#{APP_CONFIG['api_key']}"
+    uri = "#{base_uri}/poll_new_requests?key=#{APP_CONFIG['api_key']}"
     response = RestClient.get uri
 
     print_requests = JSON.parse( response )

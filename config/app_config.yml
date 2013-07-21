@@ -1,5 +1,5 @@
 development:
-  poll_base_uri: "http://ec2-174-129-184-39.compute-1.amazonaws.com"
+  poll_base_uri: "http://ec2-54-224-193-235.compute-1.amazonaws.com"
   api_key: 4ty7asdfjv7ty241itbnav2153
 
 stage:
@@ -11,6 +11,6 @@ test:
   api_key: 4ty7asdfjv7ty241itbnav2153
 
 production:
-  poll_base_uri: "http://ec2-174-129-184-39.compute-1.amazonaws.com"
+  poll_base_uri: "http://ec2-54-224-193-235.compute-1.amazonaws.com"
   api_key: 4ty7asdfjv7ty241itbnav2153
   
