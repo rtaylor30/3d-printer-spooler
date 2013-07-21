@@ -46,7 +46,7 @@
     addShadowedLight( 0.5, 1, -1, 0xffaa00, 1 );
     
     renderer = new THREE.WebGLRenderer( { antialias: true, alpha: false } );
-    renderer.setSize( window.innerWidth, window.innerHeight );
+    renderer.setSize( 800, 600 );
     
     renderer.gammaInput = true;
     renderer.gammaOutput = true;
@@ -61,8 +61,6 @@
     stats.domElement.style.position = 'absolute';
     stats.domElement.style.top = '0px';
     container.appendChild( stats.domElement );
-    
-    window.addEventListener( 'resize', onWindowResize, false );
 
     animate();
   }
@@ -87,18 +85,12 @@
     directionalLight.shadowCameraBottom = -d;
     directionalLight.shadowCameraNear = 1;
     directionalLight.shadowCameraFar = 0;
-    directionalLight.shadowMapWidth = 1024;
-    directionalLight.shadowMapHeight = 1024;
+    directionalLight.shadowMapWidth = 800;
+    directionalLight.shadowMapHeight = 600;
     directionalLight.shadowBias = -0.005;
     directionalLight.shadowDarkness = 0.15;
   }
 
-  function onWindowResize() {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize( window.innerWidth, window.innerHeight );
-  }
-  
   function render() {
     var timer = Date.now() * 0.0005;
     camera.position.setX(Math.cos( timer ) * cameraPositionScalar);
