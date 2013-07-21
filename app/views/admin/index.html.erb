@@ -1,4 +1,14 @@
-<div class="admin-layout">
-
+<div class="admin-layout section">
+  <h2>Add Job to Repetier</h2>
+  <div>
+    <a href="<%= APP_CONFIG['repetier_uri'] %>">Repetier Server</a>
+  </div>
+</div>
+<div class="check-status section">
+  <h2>Check Status
+    <div id="refresh-status">Last Updated: <%= @last_updated_dt.to_s :in_standard_format %></div>
+  </h2>
+ 
+  <%= render 'print_request/print_jobs' %>
 </div>
 
