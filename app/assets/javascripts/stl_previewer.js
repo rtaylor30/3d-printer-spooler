@@ -13,6 +13,8 @@
     container = document.createElement( 'div' );
     $('.stl-preview').empty();
     $('.stl-preview').append(container);
+    $('.stl-preview').css('height', '500px');
+    $('.stl-preview').css('padding', '10px');
     camera = new THREE.PerspectiveCamera( 30, window.innerWidth / window.innerHeight, 1, 1000 );
     scene = new THREE.Scene();
     scene.fog = new THREE.Fog( 0x72645b, 2, 1000 );
