@@ -34,7 +34,7 @@ class PrintRequestController < ApplicationController
     print_request.user = current_user
     print_request.save
     
-    Slicer.run_slicer print_request.id
+    ::Slicer.run_slicer print_request.id
 
     redirect_to '/home'
   end
