@@ -11,6 +11,7 @@
         <th>Printer Name</th>
         <th>User</th>
       <% end %>
+      <th>Preview</th>
     </thead>
     <tbody>
       <% @print_requests.each do |print_request| %>
@@ -31,6 +32,7 @@
             <td><%= print_request.printer && print_request.printer.name %></td>
             <td><%= print_request.user.nil? ? 'No User!' : print_request.user.email %></td>
           <% end %>
+          <td><a class='stl_file_preview_link' href="#" stl_file_name="/stl_file/<%= print_request.stl_file_name %>">Preview</a>
         </tr>
       <% end %>
     </tbody>

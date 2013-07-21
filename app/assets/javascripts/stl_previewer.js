@@ -11,6 +11,7 @@
   
   init_stl_previewer = function(stl_file_name) {
     container = document.createElement( 'div' );
+    $('.stl-preview').empty();
     $('.stl-preview').append(container);
     camera = new THREE.PerspectiveCamera( 30, window.innerWidth / window.innerHeight, 1, 1000 );
     scene = new THREE.Scene();

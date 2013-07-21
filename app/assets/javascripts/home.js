@@ -15,8 +15,8 @@
       'aaSorting': [[2, 'desc']] 
     });
 
-    $('#stl_file').change(function() {
-      init_stl_previewer($(this).val());
+    $('a.stl_file_preview_link').click(function() {
+      init_stl_previewer($(this).attr('stl_file_name'));
     });
   });
 })();
