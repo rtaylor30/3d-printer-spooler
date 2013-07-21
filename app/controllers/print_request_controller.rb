@@ -1,3 +1,7 @@
+require 'net/http'
+require 'uri'
+require 'json'
+
 class PrintRequestController < ApplicationController
   before_filter :validate_can_create, only: :create
 
@@ -9,6 +13,9 @@ class PrintRequestController < ApplicationController
     print_request = PrintRequest.find(params[:id])
     print_request.status = params[:print_request][:status]
     print_request.save!
+    
+    sync print_request if ENV['ADMIN_PRODUCTION']
+
     render nothing: true
   end
 
@@ -30,6 +37,14 @@ class PrintRequestController < ApplicationController
   end
 
   private
+
+    def sync print_request
+      base_uri = URI.parse( APP_CONFIG['poll_base_uri'] )
+      uri = "#{base_uri}/update_print_request/#{print_request.id}"
+      response = Net::HTTP.post_form( uri, {
+        'key' => APP_CONFIG['api_key'],
+        'status' => print_request.status} )
+    end
 
     def validate_can_create
       if not can? :manage, :all

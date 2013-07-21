@@ -1,0 +1,16 @@
+development:
+  poll_base_uri: "http://localhost:3000"
+  api_key: 4ty7asdfjv7ty241itbnav2153
+
+stage:
+  poll_base_uri: "http://localhost:3000"
+  api_key: 4ty7asdfjv7ty241itbnav2153
+
+test:
+  poll_base_uri: "http://localhost:3000"
+  api_key: 4ty7asdfjv7ty241itbnav2153
+
+production:
+  poll_base_uri: "http://ec2-174-129-184-39.compute-1.amazonaws.com"
+  api_key: 4ty7asdfjv7ty241itbnav2153
+  

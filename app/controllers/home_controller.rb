@@ -28,18 +28,5 @@ class HomeController < ApplicationController
       render 'home/index'
     end
   end
-
-  def poll_jobs
-    @jobs = PrintRequest.where(status: 'Not Ready')
-    
-    # This automatically assumes that the poller properly recieved the jobs. Another mechanism
-    # should send another post to indicate that the jobs were properly printed.
-    @jobs.each { |job|
-      job.status = 'Delivered'
-      job.save!
-    }
-
-    render json: @jobs
-  end
 end
 

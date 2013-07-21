@@ -25,9 +25,11 @@ gem 'devise'
 gem 'execjs'
 gem 'jquery-rails'
 gem 'therubyracer'
+gem 'rest-client'
 gem 'rspec'
 gem 'rspec-expectations'
 gem 'rspec-rails'
+gem 'whenever'
 
 # To use ActiveModel has_secure_password
 gem 'bcrypt-ruby', '~> 3.0.0'
