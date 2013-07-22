@@ -21,6 +21,7 @@ group :assets do
 end
 
 gem 'cancan'
+gem 'daemons'
 gem 'delayed_job_active_record'
 gem 'devise'
 gem 'execjs'
