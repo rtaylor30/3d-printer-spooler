@@ -1,0 +1,8 @@
+<select class='print-request-printer' name='print_request[printer_id]'>
+  <% name = printer.nil? ? 'None' : printer.name  %>
+  <option value="" <%= 'selected' if printer.nil? %>>None</option>
+  <% Printer.select( [:id, :name] ).each do |p| %>
+    <option value="<%= p.id %>" <%= 'selected' if name == p.name %>><%= p.name %></option>
+  <% end %>
+</select>
+

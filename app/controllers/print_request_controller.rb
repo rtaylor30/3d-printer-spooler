@@ -10,7 +10,9 @@ class PrintRequestController < ApplicationController
 
   def update
     print_request = PrintRequest.find(params[:id])
-    print_request.status = params[:print_request][:status]
+    pr_param = params[:print_request]
+    print_request.status = pr_param[:status] if pr_param[:status]
+    print_request.printer_id = pr_param[:printer_id] if pr_param[:printer_id]
     print_request.save!
     
     sync print_request if ENV['ADMIN_PRODUCTION']

@@ -12,6 +12,7 @@ class Slicer
           print_request.status = 'Not Ready'
         end
 
+        print_request.gcode_filename = stl_file_name[0..-4] + 'gcode'
         print_request.save
       }
     end

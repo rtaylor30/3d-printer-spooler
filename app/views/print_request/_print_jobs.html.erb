@@ -7,7 +7,6 @@
       <th>Time Submitted</th>
 
       <% if can? :manage, :all %>
-        <th>Time Remaining</th>
         <th>Printer Name</th>
         <th>User</th>
       <% end %>
@@ -28,8 +27,11 @@
           <td><%= print_request.stl_file_name %></td>
           <td><%= print_request.created_at.to_s :in_standard_format %></td>
           <% if can? :manage, :all %>
-            <td><%# TODO IMPLEMENT %></td>
-            <td><%= print_request.printer && print_request.printer.name %></td>
+            <td>
+              <%= form_for print_request, html: {target: 'blank_iframe'} do |f| %>
+                <%= render partial: 'print_request/printer', locals: {printer: print_request.printer} %>
+              <% end %>
+            </td>
             <td><%= print_request.user.nil? ? 'No User!' : print_request.user.email %></td>
           <% end %>
           <td><a class='stl_file_preview_link' href="#" stl_file_name="/stl_files/<%= print_request.stl_file_name %>">Preview</a>
