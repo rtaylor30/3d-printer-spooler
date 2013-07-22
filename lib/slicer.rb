@@ -7,7 +7,7 @@ class Slicer
       cmd = "slic3r --load #{Rails.root.join 'config', 'slicer_config.ini'} #{Rails.root.join 'public', 'stl_files', print_request.stl_file_name}"
       Open3.popen3( cmd ) { |stdin, stdout, stderr, wait_thr|
         if not stderr.read.blank?
-          print_request.status = 'Error'
+          print_request.status = 'Error Parsing STL File'
         else
           print_request.status = 'Not Ready'
         end
