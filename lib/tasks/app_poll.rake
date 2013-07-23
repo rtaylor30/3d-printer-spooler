@@ -11,10 +11,10 @@ namespace :app do
 
     print_requests = JSON.parse( response )
     print_requests.each do |print_request|
-      PrintRequest.create( print_request )
+      pr = PrintRequest.create( print_request )
       # Get the files associated with the print request
-      RestClient.get( APP_CONFIG['poll_base_uri'] + "/stl_files/#{print_request.gcode_filename}" ) { |response, request, result|
-        File.open( RAILS.root.join( 'tmp', print_request.gcode_filename ), 'wb' ) { |fh|
+      RestClient.get( APP_CONFIG['poll_base_uri'] + "/stl_files/#{pr.gcode_filename}" ) { |response, request, result|
+        File.open( RAILS.root.join( 'tmp', pr.gcode_filename ), 'wb' ) { |fh|
           fh.write( response )
         }
       }
