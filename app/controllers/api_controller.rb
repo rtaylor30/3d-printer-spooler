@@ -7,9 +7,9 @@ class ApiController < ApplicationController
   end
   
   def poll_new_requests
-    @print_requests = PrintRequest.where(status: 'Not Ready')
-    @print_requests.update_all(status: 'Delivered')
+    @print_requests = PrintRequest.where(status: 'Not Ready').all
     render json: @print_requests
+    PrintRequest.where(status: 'Not Ready').update_all(status: 'Delivered')
   end
 
   private
