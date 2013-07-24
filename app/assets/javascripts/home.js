@@ -11,6 +11,8 @@
       $('input#upload-file-overlay').val($(this).val());
     });
 
+    $('input#upload-file-overlay').val('Click to select file...');
+
     $('table').dataTable({
       'aaSorting': [[2, 'desc']] 
     });
