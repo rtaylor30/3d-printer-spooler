@@ -16,3 +16,6 @@
 *.swp
 /public/stl_files/*
 
+# Ignore OS X stuff
+*.DS_Store
+
