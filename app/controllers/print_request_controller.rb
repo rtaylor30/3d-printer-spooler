@@ -21,7 +21,7 @@ class PrintRequestController < ApplicationController
       print_request.save
     end
 
-    sync print_request if ENV['ADMIN_PRODUCTION'] if pr_param[:status]
+    sync print_request if ENV['ADMIN_PRODUCTION']
     redirect_to '/'
   end
 
@@ -32,7 +32,7 @@ class PrintRequestController < ApplicationController
     print_request.printer_id = pr_param[:printer_id] if pr_param[:printer_id]
     print_request.save!
     
-    sync print_request if ENV['ADMIN_PRODUCTION'] if pr_param[:status]
+    sync print_request if ENV['ADMIN_PRODUCTION'] and pr_param[:status]
 
     render nothing: true
   end
