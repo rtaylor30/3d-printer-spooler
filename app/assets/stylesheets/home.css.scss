@@ -8,6 +8,10 @@ $error_bg_color: #fac;
 $error_fg_color: #f00;
 $error_border_color: #f66;
 
+table {
+  width: $section_internal_width;
+}
+
 div.user-header {
   $header_height: 50px;
   $header_padding: 2px;
