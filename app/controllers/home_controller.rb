@@ -22,7 +22,6 @@ class HomeController < ApplicationController
   end
 
   def root
-    @printers = Printer.get_printers if can? :manage, :all
     if current_user.nil?
       render 'home/root'
     else
