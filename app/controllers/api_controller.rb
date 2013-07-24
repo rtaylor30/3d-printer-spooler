@@ -5,6 +5,8 @@ class ApiController < ApplicationController
     @print_request = PrintRequest.find(params[:id])
     @print_request.status = params['status']
     @print_request.save
+
+    render json: {'status' => 'recieved'}
   end
   
   def poll_new_requests

@@ -1,6 +1,6 @@
 module PrintRequestHelper
   def pretty_next_state_of print_request
-    if print_request.status == 'Delivered'
+    if print_request.status == 'Not Ready'
       'Send to Printer'
     elsif print_request.status == 'Started'
       'Ready for Pickup'
