@@ -2,6 +2,7 @@ class HomeController < ApplicationController
   before_filter :authenticate_user!, only: :index
 
   def index
+    @printers = Printer.get_printers if can? :manage, :all
     flash.keep
     if current_user.admin?
       @print_requests = PrintRequest.all
@@ -21,6 +22,7 @@ class HomeController < ApplicationController
   end
 
   def root
+    @printers = Printer.get_printers if can? :manage, :all
     if current_user.nil?
       render 'home/root'
     else

@@ -5,6 +5,14 @@ namespace :app do
   task poll: :environment do
     base_uri = URI.parse( APP_CONFIG['poll_base_uri'] )
 
+    uri = "#{base_uri}/poll_users?key=#{APP_CONFIG['api_key']}"
+    response = RestClient.get uri
+    users = JSON.parse( response )
+    users.each do |u|
+      user = User.new( user: u.id )
+      user.save
+    end
+
     # Update the current print_requests
     uri = "#{base_uri}/poll_new_requests?key=#{APP_CONFIG['api_key']}"
     response = RestClient.get uri

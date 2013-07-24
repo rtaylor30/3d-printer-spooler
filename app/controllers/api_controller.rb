@@ -12,6 +12,11 @@ class ApiController < ApplicationController
     PrintRequest.where(status: 'Not Ready').update_all(status: 'Delivered')
   end
 
+  def poll_users
+    @users = User.all
+    render json: @users
+  end
+
   private
 
     def check_api_key
