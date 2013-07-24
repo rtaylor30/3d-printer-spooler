@@ -9,7 +9,7 @@ namespace :app do
     response = RestClient.get uri
     users = JSON.parse( response )
     users.each do |u|
-      user = User.new( user: u.id )
+      user = User.new( user: u['id'] )
       user.save
     end
 

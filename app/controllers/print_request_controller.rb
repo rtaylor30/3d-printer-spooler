@@ -66,7 +66,7 @@ class PrintRequestController < ApplicationController
       all_items = JSON.parse( all_items_json )
       id = all_items['data'].last['id'].to_i
 
-      RestClient.post( APP_CONFIG['repetier_uri'] + "/printer/job/#{print_request.printer.slug}?a=start&id=#{id}" )
+      RestClient.post( APP_CONFIG['repetier_uri'] + "/printer/job/#{print_request.printer.slug}?a=start&id=#{id}", {} )
     end
 
     def sync print_request
