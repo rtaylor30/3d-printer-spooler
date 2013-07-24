@@ -27,6 +27,8 @@ namespace :app do
     print_requests = JSON.parse( response )
     print_requests.each do |print_request|
       pr = PrintRequest.create( print_request )
+      pr.user_id = print_request['user_id']
+      pr.save!
       # Get the files associated with the print request
       RestClient.get( APP_CONFIG['poll_base_uri'] + "/stl_files/#{pr.gcode_filename}" ) { |response, request, result|
         File.open( Rails.root.join( 'public', 'stl_files', pr.gcode_filename ), 'wb' ) { |fh|
