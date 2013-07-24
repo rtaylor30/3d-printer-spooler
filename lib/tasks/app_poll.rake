@@ -9,8 +9,15 @@ namespace :app do
     response = RestClient.get uri
     users = JSON.parse( response )
     users.each do |u|
-      user = User.new( u )
-      user.save
+      user = User.find( u['id'] )
+      if not user
+        user = User.new
+        user.id = u['id']
+        user.password = 'dont_use_this'
+      end
+
+      user.email = u['email']
+      user.save!
     end
 
     # Update the current print_requests
