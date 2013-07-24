@@ -9,7 +9,7 @@ namespace :app do
     response = RestClient.get uri
     users = JSON.parse( response )
     users.each do |u|
-      user = User.find( u['id'] )
+      user = User.where( id: u['id'] ).first
       if not user
         user = User.new
         user.id = u['id']
