@@ -8,7 +8,7 @@
     });
 
     $('input#stl_file').change(function() {
-      $('input#upload-file-overlay').val($(this).val());
+      $('input#upload-file-overlay').val($(this).val().replace("C:\\fakepath\\", ""));
     });
 
     $('input#upload-file-overlay').val('Click to select file...');
