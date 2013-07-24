@@ -41,7 +41,7 @@
           <% if can? :manage, :all %>
             <td>
               <%= form_for "/print_request/next_state/#{print_request.id}" do |f| %>
-                <input type="button" 
+                <input type="submit" 
                        class="next-state-btn" 
                        style="<%= next_state_visible?( print_request ) ? 'display: none' : '' %>" 
                        value="<%= pretty_next_state_of print_request %>" />
