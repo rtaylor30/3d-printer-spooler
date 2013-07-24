@@ -3,7 +3,8 @@ class ApiController < ApplicationController
 
   def update_print_request
     @print_request = PrintRequest.find(params[:id])
-    # TODO : Add in different hooks of things that need to be done on update
+    @print_request.status = params['status']
+    @print_request.save
   end
   
   def poll_new_requests

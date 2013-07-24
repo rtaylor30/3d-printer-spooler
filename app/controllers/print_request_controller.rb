@@ -11,7 +11,7 @@ class PrintRequestController < ApplicationController
   def next_state
     print_request = PrintRequest.find( params[:id] )
 
-    if print_request.status == 'Delivered'
+    if print_request.status == 'Not Ready'
       print_request.status = 'Started'
       print_request.save
       
@@ -31,7 +31,7 @@ class PrintRequestController < ApplicationController
     print_request.printer_id = pr_param[:printer_id] if pr_param[:printer_id]
     print_request.save!
     
-    sync print_request if ENV['ADMIN_PRODUCTION']
+    sync print_request if ENV['ADMIN_PRODUCTION'] if pr_param[:status]
 
     render nothing: true
   end

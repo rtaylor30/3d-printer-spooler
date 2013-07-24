@@ -8,6 +8,6 @@ module PrintRequestHelper
   end
 
   def next_state_visible? print_request
-    ['Delivered', 'Started'].include? print_request.status
+    not ['Not Ready', 'Started'].include? print_request.status
   end
 end
