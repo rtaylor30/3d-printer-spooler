@@ -16,12 +16,12 @@ class PrintRequestController < ApplicationController
       print_request.save
       
       send_print_request_to_printer print_request
-      sync print_request if ENV['ADMIN_PRODUCTION'] if pr_param[:status]
     elsif print_request.status == 'Started'
       print_request.status = 'Ready for Pickup'
       print_request.save
     end
 
+    sync print_request if ENV['ADMIN_PRODUCTION'] if pr_param[:status]
     redirect_to '/'
   end
 
