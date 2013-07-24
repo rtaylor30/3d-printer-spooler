@@ -136,7 +136,7 @@ div.check-status.section {
   }
 
   table {
-    width: $section_internal_width - 60;
+    width: $section_internal_width - 60 !important;
 
     th, td {
       padding: 8px;
