@@ -8,6 +8,22 @@ class PrintRequestController < ApplicationController
     @print_requests = PrintRequest.includes(:printer)
   end
 
+  def next_state
+    print_request = PrintRequest.find( params[:id] )
+
+    if print_request.status == 'Delivered'
+      print_request.status = 'Started'
+      print_request.save
+      
+      send_print_request_to_printer print_request
+    elsif print_request.status == 'Started'
+      print_request.status = 'Ready for Pickup'
+      print_request.save
+    end
+
+    redirect_to '/'
+  end
+
   def update
     print_request = PrintRequest.find(params[:id])
     pr_param = params[:print_request]
@@ -41,6 +57,18 @@ class PrintRequestController < ApplicationController
   end
 
   private
+
+    def send_print_request_to_printer print_request
+      # Upload the job and then start it.
+      RestClient.post( APP_CONFIG['repetier_uri'] + "/printer/job/#{print_request.printer.slug}", {
+        'a' => 'upload',
+        'autostart' => 'false',
+        'file' => File.new( "tmp/#{print_request.gcode_filename}", 'rb' ) })
+
+      RestClient.post( APP_CONFIG['repetier_uri'] + "/printer/job/#{print_request.printer.slug}", {
+        'a' => 'start',
+        'id' => 1 })
+    end
 
     def sync print_request
       base_uri = APP_CONFIG['poll_base_uri']

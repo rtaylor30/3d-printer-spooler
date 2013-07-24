@@ -18,6 +18,12 @@ namespace :app do
           fh.write( response )
         }
       }
+
+      RestClient.get( APP_CONFIG['poll_base_uri'] + "/stl_files/#{pr.stl_file_name}" ) { |response, request, result|
+        File.open( Rails.root.join( 'tmp', pr.stl_file_name ), 'wb' ) { |fh|
+          fh.write( response )
+        }
+      }
     end
   end
 end

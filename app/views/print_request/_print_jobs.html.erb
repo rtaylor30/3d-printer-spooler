@@ -11,6 +11,9 @@
         <th>User</th>
       <% end %>
       <th>Preview</th>
+      <% if can? :manage, :all %>
+        <th>Action</th>
+      <% end %>
     </thead>
     <tbody>
       <% @print_requests.each do |print_request| %>
@@ -34,7 +37,17 @@
             </td>
             <td><%= print_request.user.nil? ? 'No User!' : print_request.user.email %></td>
           <% end %>
-          <td><a class='stl_file_preview_link' href="#" stl_file_name="/stl_files/<%= print_request.stl_file_name %>">Preview</a>
+          <td><a class='stl_file_preview_link' href="#" stl_file_name="/stl_files/<%= print_request.stl_file_name %>">Preview</a></td>
+          <% if can? :manage, :all %>
+            <td>
+              <%= form_for "/print_request/next_state/#{print_request.id}" do |f| %>
+                <input type="button" 
+                       class="next-state-btn" 
+                       style="<%= next_state_visible? print_request ? 'display: none' : '' %>" 
+                       value="<%= pretty_next_state_of print_request %>" />
+              <% end %>
+            </td>
+          <% end %>
         </tr>
       <% end %>
     </tbody>
