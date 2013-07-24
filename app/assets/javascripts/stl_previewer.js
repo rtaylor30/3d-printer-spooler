@@ -6,26 +6,28 @@
 (function() {
   if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
   
-  var container, stats;
-  var geometry, camera, center, scene, renderer, mesh, printbox, printbox_geo, cameraPositionScalar;
+  var stats;
+  var geometry, camera, center, scene, renderer, mesh, cameraPositionScalar;
   
   init_stl_previewer = function(stl_file_name) {
-    container = document.createElement( 'div' );
     $('.stl-preview').empty();
-    $('.stl-preview').append(container);
-    $('.stl-preview').css('height', '500px');
+    $('.stl-preview').height(300);
     $('.stl-preview').css('padding', '10px');
-    camera = new THREE.PerspectiveCamera( 30, window.innerWidth / window.innerHeight, 1, 1000 );
+    camera = new THREE.PerspectiveCamera( 20, $('.stl-preview').width() / $('.stl-preview').height(), 1, 1000 );
     scene = new THREE.Scene();
-    scene.fog = new THREE.Fog( 0x72645b, 2, 1000 );
     center =  new THREE.Vector3(0,0,0);
     cameraPositionScalar = 500;
     
-    var material = new THREE.MeshPhongMaterial( { ambient: 0xff5533, color: 0xff5533, specular: 0x111111, shininess: 200 } );
-    printbox_geo = new THREE.CubeGeometry(190,100,200);
+    var material = new THREE.MeshPhongMaterial( { ambient: 0x1441ff, color: 0x1441ff, specular: 0x909090, shininess: 20 } );
+    var printbox_geo = new THREE.CubeGeometry(190, 100, 200);
     printbox_geo.applyMatrix((new THREE.Matrix4()).makeTranslation(0, 50, 0));
-    printbox = new THREE.Mesh(printbox_geo, new THREE.MeshBasicMaterial({ wireframe: 1})); 
+    var printbox = new THREE.Mesh(printbox_geo, new THREE.MeshBasicMaterial({ wireframe: 1, color: 0x444444, wireframeLinewidth: 2 })); 
     scene.add( printbox );
+
+    var basegrid_geo = new THREE.PlaneGeometry(190, 200, 19, 20);
+    basegrid_geo.applyMatrix((new THREE.Matrix4()).makeRotationX(-Math.PI/2));
+    var basegrid = new THREE.Mesh(basegrid_geo, new THREE.MeshBasicMaterial({ wireframe: 1, color: 0xaaaaaa }));
+    scene.add( basegrid );
     
     loader = new THREE.STLLoader();
     loader.addEventListener( 'load', function ( event ) {
@@ -43,12 +45,12 @@
     
     loader.load( stl_file_name );
     
-    scene.add( new THREE.AmbientLight( 0x404040 ) );
+    scene.add( new THREE.AmbientLight( 0x606060 ) );
     addShadowedLight( 1, 1, 1, 0xffffff, 1.35 );
-    addShadowedLight( 0.5, 1, -1, 0xffaa00, 1 );
+    addShadowedLight( 0.5, 1, -1, 0xffffff, 1 );
     
-    renderer = new THREE.WebGLRenderer( { antialias: true, alpha: false } );
-    renderer.setSize( 640, 480 );
+    renderer = new THREE.WebGLRenderer( { antialias: true, alpha: false, clearColor: 0xffffff } );
+    renderer.setSize( $('.stl-preview').width(), $('.stl-preview').height() );
     
     renderer.gammaInput = true;
     renderer.gammaOutput = true;
@@ -57,7 +59,7 @@
     renderer.shadowMapEnabled = true;
     renderer.shadowMapCullFace = THREE.CullFaceBack;
     
-    container.appendChild( renderer.domElement );
+    $('.stl-preview').append( renderer.domElement );
     
     stats = new Stats();
     stats.domElement.style.position = 'absolute';
@@ -99,7 +101,7 @@
     camera.position.setX(Math.cos( timer ) * cameraPositionScalar);
     camera.position.setZ(Math.sin( timer ) * cameraPositionScalar);
     camera.position.setY(85);
-    camera.lookAt(new THREE.Vector3(0,0,0));
+    camera.lookAt(new THREE.Vector3(0, 25, 0));
     camera.updateProjectionMatrix();
     renderer.render( scene, camera );  
   }
