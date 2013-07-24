@@ -60,14 +60,10 @@ class PrintRequestController < ApplicationController
 
     def send_print_request_to_printer print_request
       # Upload the job and then start it.
-      RestClient.post( APP_CONFIG['repetier_uri'] + "/printer/job/#{print_request.printer.slug}", {
-        'a' => 'upload',
-        'autostart' => 'false',
+      RestClient.post( APP_CONFIG['repetier_uri'] + "/printer/job/#{print_request.printer.slug}?a=upload&name=&autostart=0&file=%5Bobject+File%5D", {
         'file' => File.new( Rails.root.join( 'public', 'stl_files', print_request.gcode_filename ), 'rb' ) })
 
-      RestClient.post( APP_CONFIG['repetier_uri'] + "/printer/job/#{print_request.printer.slug}", {
-        'a' => 'start',
-        'id' => 1 })
+      RestClient.post( APP_CONFIG['repetier_uri'] + "/printer/job/#{print_request.printer.slug}?a=start&id=1" )
     end
 
     def sync print_request
