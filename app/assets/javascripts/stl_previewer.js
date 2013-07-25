@@ -8,10 +8,15 @@
   
   var stats;
   var geometry, camera, center, scene, renderer, mesh, cameraPositionScalar;
+  var susaning = true;
   var targetRotationX = 0;
   var targetRotationY = 0.5;
   var targetRotationXOnMouseDown = 0;
   var targetRotationYOnMouseDown = 0;
+
+  var curRotationX = targetRotationX;
+  var curRotationY = targetRotationY;
+  var lastTimer = 0;
 
   var mouseDown = false;
   var mouseX = 0;
@@ -90,6 +95,7 @@
     mouseXOnMouseDown = mouseX = event.clientX;
     mouseYOnMouseDown = mouseY = event.clientY;
 
+    susaning = false;
     targetRotationXOnMouseDown = targetRotationX;
     targetRotationYOnMouseDown = targetRotationY;
     mouseDown = true;
@@ -143,10 +149,20 @@
   }
 
   function render() {
-    var timer = Date.now() * 0.0005;
-    camera.position.setX(Math.cos( targetRotationY ) * Math.cos( targetRotationX ) * cameraPositionScalar);
-    camera.position.setZ(Math.cos( targetRotationY ) * Math.sin( targetRotationX ) * cameraPositionScalar);
-    camera.position.setY(Math.sin( targetRotationY ) * cameraPositionScalar );
+    if( lastTimer == 0 ) {
+        lastTimer = Date.now();
+    }
+    if( susaning ) {
+        targetRotationX += (Date.now() - lastTimer) * 0.0005;
+        lastTimer = Date.now();
+    }
+
+    curRotationX += ( targetRotationX - curRotationX ) * 0.07;
+    curRotationY += ( targetRotationY - curRotationY ) * 0.07;
+
+    camera.position.setX(Math.cos( curRotationY ) * Math.cos( curRotationX ) * cameraPositionScalar);
+    camera.position.setZ(Math.cos( curRotationY ) * Math.sin( curRotationX ) * cameraPositionScalar);
+    camera.position.setY(Math.sin( curRotationY ) * cameraPositionScalar );
     camera.lookAt(new THREE.Vector3(0, 25, 0));
     camera.updateProjectionMatrix();
     renderer.render( scene, camera );  
