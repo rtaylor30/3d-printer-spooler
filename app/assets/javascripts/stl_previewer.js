@@ -8,6 +8,16 @@
   
   var stats;
   var geometry, camera, center, scene, renderer, mesh, cameraPositionScalar;
+  var targetRotationX = 0;
+  var targetRotationY = 0.5;
+  var targetRotationXOnMouseDown = 0;
+  var targetRotationYOnMouseDown = 0;
+
+  var mouseDown = false;
+  var mouseX = 0;
+  var mouseY = 0;
+  var mouseXOnMouseDown = 0;
+  var mouseYOnMouseDown = 0;
   
   init_stl_previewer = function(stl_file_name) {
     $('.stl-preview').empty();
@@ -60,6 +70,9 @@
     renderer.shadowMapCullFace = THREE.CullFaceBack;
     
     $('.stl-preview').append( renderer.domElement );
+    $('.stl-preview').mousedown( onPreviewMouseDown );
+    $(document).mousemove( onPreviewMouseMove );
+    $(document).mouseup( onPreviewMouseUp );
     
     stats = new Stats();
     stats.domElement.style.position = 'absolute';
@@ -69,7 +82,40 @@
 
     animate();
   }
-  
+
+  function onPreviewMouseDown( event ) {
+
+    event.preventDefault();
+
+    mouseXOnMouseDown = mouseX = event.clientX;
+    mouseYOnMouseDown = mouseY = event.clientY;
+
+    targetRotationXOnMouseDown = targetRotationX;
+    targetRotationYOnMouseDown = targetRotationY;
+    mouseDown = true;
+
+  }
+
+  function onPreviewMouseMove( event ) {
+
+    if( mouseDown ) {
+
+      mouseX = event.clientX;
+      mouseY = event.clientY;
+
+      targetRotationX = targetRotationXOnMouseDown + ( mouseX - mouseXOnMouseDown ) * 0.009;
+      targetRotationY = Math.min(1.5, Math.max(-1.4, targetRotationYOnMouseDown + ( mouseY - mouseYOnMouseDown ) * 0.009));
+
+    }
+
+  }
+
+  function onPreviewMouseUp( event ) {
+
+    mouseDown = false;
+
+  }
+
   function animate() {
     requestAnimationFrame( animate );
     render();
@@ -98,9 +144,9 @@
 
   function render() {
     var timer = Date.now() * 0.0005;
-    camera.position.setX(Math.cos( timer ) * cameraPositionScalar);
-    camera.position.setZ(Math.sin( timer ) * cameraPositionScalar);
-    camera.position.setY(85);
+    camera.position.setX(Math.cos( targetRotationY ) * Math.cos( targetRotationX ) * cameraPositionScalar);
+    camera.position.setZ(Math.cos( targetRotationY ) * Math.sin( targetRotationX ) * cameraPositionScalar);
+    camera.position.setY(Math.sin( targetRotationY ) * cameraPositionScalar );
     camera.lookAt(new THREE.Vector3(0, 25, 0));
     camera.updateProjectionMatrix();
     renderer.render( scene, camera );  
